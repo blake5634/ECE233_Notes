@@ -1,0 +1,111 @@
+
+
+\documentclass[letterpaper,12pt]{book}
+
+%
+%  Build command:
+% pdflatex -shell-escape  CtlBook.tex
+%
+% (-shell-escape option is required for minted code listing highlighting)
+% Uncomment for bibliog.
+%\bibliographystyle{unsrt}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{boxedminipage}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}
+\usepackage{framed}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+
+% tikz package for block diagrams
+\usepackage{tikz}
+\usetikzlibrary{arrows,calc,patterns,decorations.pathmorphing,decorations.markings}
+\tikzset{>=latex} % blockier style arrow heads
+
+
+\newcommand{\grad}{\bigtriangledown}
+\newcommand{\pd}{\partial}
+\newcommand{\br}{\epsilon \mathcal{R}}
+
+% --
+% HOMEWORK Page headers
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%% HEADER / FOOTER
+% \pagestyle{fancy}
+% %%%%%  Page header/footer fields for "NSF Style" proposal
+% %%%%%  \chead will be changed with each section
+% \pagestyle{fancy}
+% \lhead{\small\sc ECE233}
+% <h>\chead{\large\bf Homework 4}
+% <n>\chead{\large\bf Homework 4 {\bf SOLUTIONS}}
+% \rhead{ver: \today}
+% \lfoot{Hannaford, U. of Washington}
+% \rfoot{Aut. 2025}
+% \cfoot{\thepage}
+%
+% --
+
+\pagestyle{fancy}
+\lhead{Chapter \thechapter}
+%\chead{CENTER HEADER}
+\rhead{\today}
+\lfoot{ECE233, U. of Washington}
+%\rfoot{\today}
+\rfoot{\thepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  Set Up Margins
+\input{pagedim.tex}
+\input{rbook_environments.tex}
+\setlength{\headheight}{15.25pt}
+\addtolength{\topmargin}{-2.49998pt}
+
+\frontmatter
+
+\begin{document}
+
+\title{Lecture Notes ECE 233 }
+
+\author{Blake Hannaford}
+
+\maketitle
+
+\date{\today\\(C) Copyright 2025, Blake Hannaford.\\
+\href{http://creativecommons.org/licenses/by-sa/4.0/}{Creative Commons Attribution-ShareAlike 4.0 International License}.}
+%
+\tableofcontents
+%
+% % \input{Preface.tex}
+%
+%
+\mainmatter
+%
+% % \linenumbers
+
+\newpage
+
+
+%
+\input{Chapt01_ACC.tex}  % Review
+
+\input{Chapt02_ACC.tex}
+
+\input{Chapt03_ACC.tex}
+%
+% \input{Chapt04_ACC.tex}
+%
+% % \input{Chapt05_ACC}
+% %
+% \input{Chapt06_ACC}
+% \input{CpxNumQz_Apdx.tex}
+
+\input{Appendix_ACC.tex}
+
+\end{document}

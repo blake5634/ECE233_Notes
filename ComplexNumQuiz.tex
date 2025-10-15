@@ -1,0 +1,149 @@
+%% Default Latex document template
+%%
+%%  blake@rcs.ee.washington.edu
+
+\documentclass[letterpaper]{article}
+
+% Uncomment for bibliog.
+%\bibliographystyle{unsrt}
+
+\usepackage{graphicx}
+\usepackage{lineno}
+%\usepackage{fancyhdr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+%
+%  Set Up Margins
+\input{templates/pagedim.tex}
+
+%
+%        Font selection
+%
+%\renewcommand{\rmdefault}{ptm}             % Times
+%\renewcommand{\rmdefault}{phv}             % Helvetica
+%\renewcommand{\rmdefault}{pcr}             % Courier
+%\renewcommand{\rmdefault}{pbk}             % Bookman
+%\renewcommand{\rmdefault}{pag}             % Avant Garde
+%\renewcommand{\rmdefault}{ppl}             % Palatino
+%\renewcommand{\rmdefault}{pch}             % Charter
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%         Page format Mods HERE
+%
+%Mod's to page size for this document
+\addtolength\textwidth{0cm}
+\addtolength\oddsidemargin{0cm}
+\addtolength\headsep{0cm}
+\addtolength\textheight{0cm}
+%\linespread{0.894}   % 0.894 = 6 lines per inch, 1 = "single",  1.6 = "double"
+
+% header options for fancyhdr
+
+%\pagestyle{fancy}
+%\lhead{LEFT HEADER}
+%\chead{CENTER HEADER}
+%\rhead{RIGHT HEADER}
+%\lfoot{Hannaford, U. of Washington}
+%\rfoot{\today}
+%\cfoot{\thepage}
+
+
+
+% Make table rows deeper
+%\renewcommand\arraystretch{2.0}% Vertical Row size, 1.0 is for standard spacing)
+
+\begin{document}
+\setpagewiselinenumbers        %  Line numbers for edits to drafts.
+\modulolinenumbers[1]          %  number every N lines
+
+% \linenumbers                   %  start numbering lines here
+
+\clearpage
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Complex Number Quiz}\label{ComplexNumberQuiz}
+Take this quiz then check your answers on Page \pageref{CN_answers}.  Use only the following functions on your calculator (or fewer as instructed):
+
+\[
+* \quad \div + \quad - \quad \sqrt{x}
+\]
+
+
+It should be {\bf easy for you to get exact answers}.  If not, then you need to review the concepts in this quiz and section \ref{cnconcepts}.   Some Kahn Academy videos are pre-linked in Section \ref{KahnV}.
+
+
+\begin{enumerate}
+
+\item  What is $\sqrt{-16}$ ?
+
+\item  Evaluate
+\[
+X = \frac{-b + \sqrt{4ac}}{2a}
+\]
+for the following values:
+\begin{quotation}
+\begin{tabular} {c|c|c}
+a&b&c  \\ \hline
+1&2&3 \\
+1&-4&29\\
+2&28&1156
+\end{tabular}
+\end{quotation}
+
+
+\item  Evaluate
+\[
+(6+j16) + (-7-j6) =
+\]
+\[
+(27-j0.75) - (1.6+j0.27) =
+\]
+
+
+\item  Evaluate  $M\times N$ where
+
+\begin{quotation}
+\begin{tabular} {c|c}
+M&N \\ \hline
+$(2+6j)$	&	$(1+3j)$   	\\
+$(1.7-0.6j)$    &	$(3.2+0.4j)$	\\
+\end{tabular}
+\end{quotation}
+
+
+\item  Plot the following points on the complex plane:
+\[
+a = -3+1.5j \qquad b = 2-j \qquad c = j
+\]
+
+
+\includegraphics[width=6cm]{figsapdx/00926a.png}
+
+
+
+\item  Convert $X_1=(4+3j)$ to polar (magnitude-angle) form
+
+
+\item  Convert $X_2=(-16+3.7j)$ to polar (magnitude-angle) form
+
+
+\item  Represent $X_3 = (-1+6j)$ in exponential form
+
+\item  For
+\[
+a = 3e^{j\pi/4} \qquad b = 2\angle{45^\circ}
+\]
+Convert them to ``$a+bj$'' form and multiply $a*b$ without using a calculator.
+
+\end{enumerate}
+
+
+
+
+
+%  Use name of bibliography files without .bib extension
+%\bibliography{brl}
+\end{document}
+
