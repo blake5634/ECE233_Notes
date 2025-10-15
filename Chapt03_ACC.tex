@@ -16,16 +16,16 @@ are  Watts.
 We need to {\bf define} ``positive'' and ``negative'' when we talk about
 power. For example for a generator, positive power is power (energy) flowing
 {\bf out} but for a speaker electrical power is the power (energy) flowing
-{\bf in}!     This is just a convention however.  We could declare:
+{\bf in}!     This is just a convention however.  Most of the time we will declare:
 
 \begin{quotation} ``Positive power means power dissipated (or converted) inside
 a circuit.'' \end{quotation}
 
 But then an unfortunate generator manufacturer would have to specify their
 product as ``New
-and improved model XY270 has -10kW output!'' which doesnt generate many sales.
+and improved model XY270 has -10kW output!'' which does not generate many sales.
 
-So we instead use the voltage and current sign conventions as follows
+So we need to understand the voltage and current sign conventions as follows
 
 \includegraphics[width=0.3\textwidth]{figsChapt03/IE47318.png}
 
@@ -261,7 +261,7 @@ Find the average power sourced by the voltage source in this circuit:
 
 
 \[
-\omega = 100 rad/s\;\; \vec{V} = 10 e^{j 0^\circ} \; \mathrm{Volts}
+\omega = 100 rad/s\;\; \vec{V} = 10 e^{j 0^\circ} = 10\; \mathrm{Volts}
 \]
 
 \[
@@ -282,19 +282,22 @@ where $\phi$ is the phase difference between voltage  and current.
 
 applying Ohm's law and $\vec V_L = j\omega L$,
 \[
-Z = 10 + j10, \quad \vec{I} = \frac{10}{10\sqrt{2} e^{j45^\circ}} = \frac{1}{\sqrt{2}} e^{j-45^\circ}
+Z = 10 + j10
+\]
+putting $Z$ and $I$ in mag/angle form:
+\[
+\vec{I} = \frac{10}{10\sqrt{2} e^{j45^\circ}} = \frac{1}{\sqrt{2}} e^{j-45^\circ}
 \]
 
 \[
-P_{AV} = \frac{1}{2\sqrt{2}} \times 10 \times \frac{1}{\sqrt{2}} \cos(-45^\circ )
+P_{AV} = \frac{I_M}{\sqrt{2}} \frac{V_M}{\sqrt{2}}  \cos(-45^\circ )
 \]
 
 \[
-= \frac{1}{2\sqrt{2}} \times 10 \times \frac{1}{\sqrt{2}} = 2.5
-\text{Watts}
+= \frac{10}{2 }   \times \cos(45^\circ) = 5\times0.707 = 3.535 \text{Watts}
 \]
 
-We call the factor $\cos(\phi)$ the {\bf power factor, PF}, a number
+We call the factor $\cos(\angle Z)$ the {\bf power factor, PF}, a number
 between 0 and 1 which determines how much average power we get from the
 given voltage and current magnitudes.
 
@@ -322,20 +325,20 @@ Let's apply this to
 find $P_{AV}$ dissipated in the resistor $R$ of the above circuit
 
 \[
-\vec{I}_R = \vec{I} = \frac{1}{\sqrt{2}} e^{j45^\circ}
+\vec{I}_R = \vec{I}/\sqrt{2} = \frac{1}{\sqrt{2}} e^{j-45^\circ}
 \]
 
 \[
-\vec{V}_R = \vec{I}_R R = \frac{10}{\sqrt{2}} e^{j45^\circ}
+\vec{V}_R = \vec{I}_R R = \sqrt{10^2 +10^2}e^{j-45^\circ} =\frac{10}{\sqrt{2}} e^{j-45^\circ}
 \]
 
 therefore:
 \[
- I_{mR} = \frac{1}{\sqrt{2}}, \quad V_{mR} = \frac{10}{\sqrt{2}}, \quad \phi = \angle z = 0
+ I_{mR} = \frac{1}{\sqrt{2}}, \quad V_{mR} = \frac{10}{\sqrt{2}}, \quad \phi = \angle Z = -45^\circ
 \]
 
 \[
-P_{AVR} = \frac{10}{\sqrt{2}} \cdot \frac{1}{\sqrt{2}} \cdot \frac{1}{2} \cos(0) = 2.5 \text{ Watts}
+P_{AVR} = \frac{10}{\sqrt{2}\sqrt{2}    \cos(-45^\circ) = 3.535 \text{ Watts}
 \]
 
 \noindent Note
@@ -346,26 +349,26 @@ P_{AVR} = P_{AV_{\text{TOTAL}}}
 What we computed for the resistor alone is also the total for
 the whole circuit.
 
-Checking this, let's find $P_{AV}$ ``dissipated in'' L
-
-\[
-\vec{I}_L = \vec{I} = \frac{1}{\sqrt{2}} e^{j45^\circ}
-\]
-
-\[
-\vec{V}_L = j\omega L \vec{I} = e^{j\pi/2} \frac{10}{\sqrt{2}} e^{j45^\circ} = \frac{10}{\sqrt{2}} e^{j135^\circ}
-\]
-
-\[
-P_{AVL} = \frac{1}{\sqrt{2}} \cdot \frac{10}{\sqrt{2}} \cos(135^\circ - 45^\circ) = 0!
-\]
-
-
-This will always be true because
-
-\[
-\angle z_L = \pi/2 \Rightarrow pf_L = 0
-\]
+% Checking this, let's find $P_{AV}$ ``dissipated in'' L
+%
+% \[
+% \vec{I}_L = \vec{I} = \frac{1}{\sqrt{2}} e^{j45^\circ}
+% \]
+%
+% \[
+% \vec{V}_L = j\omega L \vec{I} = e^{j\pi/2} \frac{10}{\sqrt{2}} e^{j45^\circ} = \frac{10}{\sqrt{2}} e^{j135^\circ}
+% \]
+%
+% \[
+% P_{AVL} = \frac{1}{\sqrt{2}} \cdot \frac{10}{\sqrt{2}} \cos(135^\circ - 45^\circ) = 0!
+% \]
+%
+%
+% This will always be true because
+%
+% \[
+% \angle z_L = \pi/2 \Rightarrow pf_L = 0
+% \]
 
 \newpage
 
