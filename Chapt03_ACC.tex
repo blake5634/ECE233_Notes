@@ -134,18 +134,49 @@ p(t) = v(t)*i(t) = V_M I_M \cos(\omega t ) \cos(\omega t + \phi )
 \]
 (note that $\phi = \angle{Z}$)
 
-\noindent A trig identity is the  sum of angles formula:
+\noindent A trig identity is the  product of cosines formula\footnote{See wikipedia trig indentities}:
 
 \[
-\cos(a + b) = \cos a \cos b - \sin a \sin b
+\cos(a) \cos(b) = \frac {1} {2} (\cos(a-b) + \cos(a+b))
 \]
-so using that we get:
+where $a=\omega t$ and $b=\omega t + \phi$.
+
+So using that we get:
 
 \[
-p(t) = \frac{I_M V_M }{2} \cos(\angle z) + \frac{I_M V_M}{2} \cos(2\omega t + 2\phi + \angle z)
+p(t) = \frac{I_M V_M }{2} \cos(\omega t -\omega t - \phi) + \frac{I_M V_M}{2} \cos(\omega t + \omega t + \phi )
 \]
 
-This has two components.   1) The average power (a constant, $\frac{V_M I_M}{2} \cos(\angle z)$) and 2) a time varying power ($\frac{I_M V_M}{2} \cos(2\omega t + 2\phi + \angle z)$).
+\[
+p(t) = \frac{I_M V_M }{2} \cos( \phi) + \frac{I_M V_M}{2} \cos(2\omega t + \phi )
+\]
+Note also that $\cos(-x) = \cos(x)$ and that $V$ and $I$ are related by
+\[
+\vec V = \vec I Z
+\]
+so $\phi = \angle {Z}$
+
+So our most useful form of the result is
+\[
+p(t) = \frac{I_M V_M }{2} \cos( \angle{Z}) + \frac{I_M V_M}{2} \cos(2\omega t + \angle{Z})
+\]
+
+This has two components.
+1) The average power (a {\bf constant}, $\frac{V_M I_M}{2} \cos(\angle Z)$) and
+2) a time varying power ($\frac{I_M V_M}{2} \cos(2\omega t   + \angle Z)$).
+
+If we are using RMS values instead of the absolute magnitudes $V_M, I_M$,
+we note
+\[
+\frac {V_MI_M}  {2} = |\vec V_R||\vec I_R| = V_R I_R
+\]
+
+so we also have
+\[
+p(t) = V_RI_R\cos(\angle{Z}) + V_RI_Rcos(2\omega+\angle{Z})
+\]
+
+\subsection{Computing Power Waveforms with Python}
 
 \vspace{0.3in}
 In the following, we will make some python computations of $v(t), p(t)$
@@ -161,6 +192,61 @@ The current will be the same in each case, e.g.
 \[
 i(t) = 1.0\cos(t) \;\; \text{Amps} \to  \vec I = 1.0 \angle 0^\circ
 \]
+The python code will simply compute $p(t)$ at each instant of time and plot it.
+
+\begin{listing}
+\begin{minted}{python}
+import numpy as np
+import matplotlib.pyplot as plt
+#
+#   Visualize sinusoidal voltage and current and power
+#     for R, L, C
+w = 1
+C = 1
+R = 2.0
+L = 0.5
+j = 0.0+1.0j
+
+ZR = R
+ZC = 1.0/(j*w*C)
+ZL = j*w*L
+# choose an element:
+Z = ZC
+# titlestr = 'Resistor'
+titlestr = 'Capacitor'
+# titlestr = 'Resistor'
+
+phi = np.angle(Z)
+T = np.linspace(0,5*np.pi/2, 50)
+V = (1.0 + 0j) * np.e**(j*w*T)  # complex sinusoid voltage
+I = V/Z
+Vr = np.real(V)
+Ir = np.real(I)
+P = Vr*Ir
+i=0
+for t in T:
+   print(t, Vr[i], Ir[i], P[i])
+fig = plt.figure(figsize=(10,10))
+ax = plt.gca()
+data = [Ir, Vr, P]
+colors=['k','b','r']
+for i in range(3):
+    plt.plot(T,data[i], color=colors[i])
+pi = np.pi
+tickpts = np.array(range(12))
+tickvals = pi/4 * tickpts
+ax.set_xticks(tickvals)
+ax.set_xlabel('wt (rad)')
+ax.set_ylabel('Amplitude')
+ax.legend(['Current', 'Voltage', 'Inst. Pwr.'])
+plt.title('Voltage, Current, Power: '+titlestr)
+plt.grid()
+plt.show()
+\end{minted}
+\caption{Python Code for visualizing power waveforms (red).}
+\label{lst:basicTustin}
+\end{listing}
+
 
 \paragraph{Capacitor}
 Consider a capacitor where
@@ -223,7 +309,8 @@ Observations:
 
 \subsection*{Inductor:}
 
-Just as with the capacitor, the net power in an inductor is zero.
+Just as with the capacitor, the net power in an inductor is zero. (Note
+different y-axis scale for this plot).
 The phase shift is now $+\pi/2$ but the product of voltage and current
 is still symmetrical about the $\omega t$ axis which averages to zero.
 
@@ -235,7 +322,7 @@ Z = j\omega L \quad V_M = I_M \omega L \quad \angle z = \pi/2
 p(t) = 0 + \frac{I_M^2}{2} \omega L \cos(2\omega t + 2\phi + \frac{\pi}{2})
 \]
 
-\includegraphics[width=0.4\textwidth]{figsChapt03/LN19448.png}
+\includegraphics[width=0.5\textwidth]{figsChapt03/LN19448.png}
 
 
 \begin{enumerate}
@@ -482,7 +569,7 @@ looking at $P_3$,  since $\omega_1 \neq \omega_2$,
 The point is that if in the steady state sinusoidal case, if $\omega_1 \neq \omega_2$, we {\bf can} assume
 superposition of power computation.
 
-\subsection*{Significance of sup of power at different frequencies}
+\subsection*{Significance of Superposition of power at different frequencies}
 
 A circuit or system with input composed if many sinusoids can be analyzed w.r.t. avg power at each freq separately.  Examples of where we will use this include Audio, Communications,
 and Control Systems.
@@ -657,7 +744,7 @@ compared to a zero-mean for a sinusoid.
 
 
 
-\subsection{Summing up for sinusoids}
+\subsection{Additional Forms:  Power for Sinusoids}
 With the RMS value, we now have
 
 \[
@@ -805,11 +892,13 @@ $Q$ is the {\bf Reactive Power}
 Complex power can be plotted on the complex plane.  The Real Power, $P$, is
 the real-axis component, and the Reactive Power, $jQ$ is the imaginary component
 of Complex Power.
+
+\vspace{0.25in}
 \includegraphics[width=0.65\textwidth]{figsChapt03/A69D31.png}
 
 Where $\theta = \angle{Z}$.
 
-\subsection{Types of Power  V1}
+\subsection{Types of Power }
 Summarizing the types of power so far!
 
 \begin{center}
@@ -843,7 +932,7 @@ Some facts obvious from the complex power diagram above:
 
 
 
-\subsection{Two Examples of Complex Power}
+\subsection{Two Ways to get Complex Power in an Impedance}
 
 \includegraphics[width=0.3\textwidth]{figsChapt03/MB87549.png}
 
@@ -885,7 +974,11 @@ showing that
 
 So
 \[
-S = \frac{\vec{V}_R \vec{V}_R^*}{Z^*} = \frac{|\vec{V}_R|^2}{Z^*} = \frac{V_M^2}{\vec{2}}\frac{1}{Z^*}
+S = \frac{\vec{V}_R \vec{V}_R^*}{Z^*} = \frac{|\vec{V}_R|^2}{Z^*}
+\]
+\[\boxed{
+= \frac{V_M^2}{\vec{2}}\frac{1}{Z^*}
+}
 \]
 
 2)
@@ -898,7 +991,12 @@ S = \vec I_R \vec I_R^* Z
 \]
 
 \[
-= |\vec{I}_R|^2 {Z} = I_R^2 {Z} = \frac{I_M^2}{2} {Z}
+= |\vec{I}_R|^2 {Z} = I_R^2 {Z}
+\]
+\[
+\boxed {
+     S=  \frac{I_M^2}{2} {Z}
+     }
 \]
 
 Notes:
@@ -916,7 +1014,7 @@ Summarizing:
 
 \begin{center}
 \begin{tabular}{c|c}
-DC & RAS \\
+DC & RMS sinusoids \\
 \hline
 $P = I^2 R$ & $S = |\vec{I}_R|^2 Z$ \\
 $P = \frac{V^2}{R}$ & $S = \frac{|\vec{V}_R|^2}{Z^*}$ \\
@@ -1040,7 +1138,8 @@ P_{AV_{\text{user}}} = \text{Re}\left\{ |\vec{I}_R|^2 Z_L \right\}
 \]
 
 \noindent Assume constant power use,$P_{AV_{\text{user}}} = P$.
-Note: Loss is proportional to $|\vec{I}_R|^2$,
+
+The wasted energy is the heating of the transmission line which is  $R|\vec{I}_R|^2$,
 so how does $\vec{I}_R$ depend on the power factor of $Z_L$?
 From the previous result:
 
@@ -1054,10 +1153,11 @@ the transmission line, $|\vec{I}_R|^2 R$, is minimized (but not eliminated) when
 \[
 \cos \angle z_L = 1
 \]
+
 So if the user can ``correct'' their power factor towards 1.0,
 the utility saves money.
 For this reason, utilities often can charge
-an extra fee to users who's power factors fall below a  threshold.
+an extra fee to users whose power factors fall below a  threshold.
 
 We move the power factor towards 1 by moving the
 impedance angle to 0.
@@ -1102,7 +1202,7 @@ as shown below
 
 (i.e $|Q_C| < |Q_L|$)
 
-Now we have a much smaller {\bf net} inductive reactance.   We have `` corrected''
+Now we have a much smaller {\bf net} inductive reactance.   We have ``corrected''
 the power factor of the load to a more acceptable level.
 
 It can be shown that  if we want a desired power factor of $pf_d$ and that our phase
