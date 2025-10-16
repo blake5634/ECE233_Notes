@@ -120,7 +120,7 @@ With reference to this simple circuit, we can write
 p(t) = i(t) \cdot v(t)
 \]
 for the sinusoidal steady state, and defining $\phi=0$ according
-to the applied voltage wave,
+to the phase angle of the applied voltage wave,
 \[
 v(t) = V_M\cos(\omega t)
 \]
@@ -130,7 +130,7 @@ i(t) = I_M\cos(\omega t + \phi)
 ($V_M, I_M$ are real numbers)
 
 \[
-p(t) = v(t)*i(t) = V_M I_M \cos(\omega t ) \cos(\omega t + \phi )
+p(t) = v(t) \cdot i(t) = V_M I_M \cos(\omega t ) \cos(\omega t + \phi )
 \]
 (note that $\phi = \angle{Z}$)
 
@@ -156,14 +156,14 @@ Note also that $\cos(-x) = \cos(x)$ and that $V$ and $I$ are related by
 \]
 so $\phi = \angle {Z}$
 
-So our most useful form of the result is
+Perhaps the  most useful form of the result is
 \[
 p(t) = \frac{I_M V_M }{2} \cos( \angle{Z}) + \frac{I_M V_M}{2} \cos(2\omega t + \angle{Z})
 \]
 
 This has two components.
-1) The average power (a {\bf constant}, $\frac{V_M I_M}{2} \cos(\angle Z)$) and
-2) a time varying power ($\frac{I_M V_M}{2} \cos(2\omega t   + \angle Z)$).
+{\bf 1)} The average power (a {\bf constant}, $\frac{V_M I_M}{2} \cos(\angle Z)$) and
+{\bf 2)} a time varying power ($\frac{I_M V_M}{2} \cos(2\omega t   + \angle Z)$).
 
 If we are using RMS values instead of the absolute magnitudes $V_M, I_M$,
 we note
@@ -254,14 +254,15 @@ Consider a capacitor where
 Z = \frac{j}{\omega C}, \quad V_M = I_M |Z| = \frac{I_M}{\omega C}, \quad \angle z = -\pi/2
 \]
 
-and again we assume
-sinusoidal steady state with
-\[
-i(t) = I_M \cos(\omega t + \phi)
-\]
+and again we assume sinusoidal steady state with
 \[
 v(t) = V_M \cos(\omega t)
 \]
+
+\[
+i(t) = I_M \cos(\omega t + \phi)
+\]
+
 then
 \[
 p(t) = \frac{I_M^2}{2\omega C} \cos(-\pi/2) + \frac{I_M^2}{2\omega C} \cos(2\omega t  - \frac{\pi}{2})
@@ -348,7 +349,7 @@ Find the average power sourced by the voltage source in this circuit:
 
 
 \[
-\omega = 100 rad/s\;\; \vec{V} = 10 e^{j 0^\circ} = 10\; \mathrm{Volts}
+\omega = 100 rad/s\;\; \vec{V} = 20 e^{j 0^\circ} = 20\; \mathrm{Volts}
 \]
 
 \[
@@ -356,7 +357,7 @@ R = 10 \Omega,\;\; L = 0.1 \text{H}
 \]
 
 \noindent Since $\vec V$ is a sinusoid (with an absolute magnitude of
-$V_M=10$), we can apply
+$V_M=20$), we can apply
 
 \[
 P_{AV} = \frac{I_M V_M}{2} \cos(\phi)
@@ -367,22 +368,26 @@ where $\phi$ is the phase difference between voltage  and current.
 \vec{I} = \frac{\vec{V}}{Z},  \quad \phi = \angle{Z}
 \]
 
-applying Ohm's law and $\vec V_L = j\omega L$,
+% applying Ohm's law and $\vec V_L = j\omega L$,
 \[
-Z = 10 + j10
+Z = 10 + j10 = 10\sqrt{2}e^{j45^\circ}
 \]
 putting $Z$ and $I$ in mag/angle form:
 \[
-\vec{I} = \frac{10}{10\sqrt{2} e^{j45^\circ}} = \frac{1}{\sqrt{2}} e^{j-45^\circ}
+\vec{I} = \frac{\vec V}{Z} = \frac{20}{10\sqrt{2} e^{j45^\circ}} = I_M e^{j-45^\circ}
+\]
+\[\boxed{
+    I_M=\frac{2}{\sqrt{2}}
+  }
+\]
+\[
+P_{AV} = \frac{I_M V_M}{2} \cos(\angle Z) = \frac {2}  {\sqrt{2}} \frac {20}  {2}\cos(-45^\circ)
+\]
+\[\boxed{
+    P_{AV} = \frac {40}  {2\sqrt{2}}\cos(\angle Z)  =  \frac {20}  {\sqrt{2}}\times 0.707 = 10.9 \text{ Watts}
+    }
 \]
 
-\[
-P_{AV} = \frac{I_M}{\sqrt{2}} \frac{V_M}{\sqrt{2}}  \cos(-45^\circ )
-\]
-
-\[
-= \frac{10}{2 }   \times \cos(45^\circ) = 5\times0.707 = 3.535 \text{Watts}
-\]
 
 We call the factor $\cos(\angle Z)$ the {\bf power factor, PF}, a number
 between 0 and 1 which determines how much average power we get from the
@@ -425,7 +430,7 @@ therefore:
 \]
 
 \[
-P_{AVR} = \frac{10}{\sqrt{2}\sqrt{2}    \cos(-45^\circ) = 3.535 \text{ Watts}
+P_{AVR} = \frac{10}{\sqrt{2}\sqrt{2} }   \cos(-45^\circ) = 3.535 \text{ Watts}
 \]
 
 \noindent Note
@@ -598,7 +603,7 @@ But, what about factor of $\frac{1}{2}$?    To allow this dot-product interpreta
 voltage and current phasors, we need a new concept, the {\bf Root-Mean-Square, RMS} voltage
 and current.
 
-for any function $x(t)$,
+For any function $x(t)$,
 
 \paragraph{Define}
 
@@ -1206,10 +1211,10 @@ Now we have a much smaller {\bf net} inductive reactance.   We have ``corrected'
 the power factor of the load to a more acceptable level.
 
 It can be shown that  if we want a desired power factor of $pf_d$ and that our phase
-angle is therefore $\theta_1 = \cos^{-1}(pf_d)$ that
+angle is therefore $\theta_{pfd} = \cos^{-1}(pf_d)$ that
 
 \[
-C = \frac{Q_L - P \tan \theta_1}{\sqrt{|\vec{VL}_R|^2} \omega}
+C = \frac{Q_L - P \tan \theta_{pfd}}{\sqrt{|\vec{VL}_R|^2} \omega}
 \]
 %
 % were $VL_R$ is the RMS load voltage.
